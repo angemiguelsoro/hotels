@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,12 +27,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: MyAppBar(),
+    return Scaffold(
+      appBar: const MyAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SearchSection(),
+            const SearchSection(),
             HotelSection(),
           ],
         ),
@@ -218,7 +219,42 @@ class SearchSection extends StatelessWidget {
 }
 
 class HotelSection extends StatelessWidget {
-  const HotelSection({super.key});
+  HotelSection({super.key});
+
+  final List hotelList = [
+    {
+      'title': 'Grand Royl Hotel',
+      'place': 'wembley, London',
+      'distance': 2,
+      'review': 80,
+      'picture': 'images/hotel_1.png',
+      'price': '180',
+    },
+    {
+      'title': 'Queen Hotel',
+      'place': 'wembley, London',
+      'distance': 3,
+      'review': 13,
+      'picture': 'images/hotel_2.png',
+      'price': '220',
+    },
+    {
+      'title': 'Grand mal Hotel',
+      'place': 'wembley, London',
+      'distance': 6,
+      'review': 88,
+      'picture': 'images/hotel_3.png',
+      'price': '220',
+    },
+    {
+      'title': 'Hilton',
+      'place': 'wembley, London',
+      'distance': 11,
+      'review': 34,
+      'picture': 'images/hotel_4.png',
+      'price': '220',
+    },
+  ];
 
   @override
   Widget build(BuildContext context)  {
@@ -226,10 +262,54 @@ class HotelSection extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       color: Colors.white,
       child: Column(
+        children: [
+          SizedBox(
+            height: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '550 hotels founds',
+                  style: GoogleFonts.nunito(
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Filters',
+                      style: GoogleFonts.nunito(
+                        color: Colors.black,
+                        fontSize: 15,
+                      ),
+                    ),
+                    const IconButton(
+                      icon: Icon(
+                        Icons.filter_list_outlined,
+                        color: dGreen,
+                        size: 25,
+                      ),
+                      onPressed: null,
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          Column(
+            children: hotelList.map((hotel) {
+              return Image.asset(hotel['picture']);
+            }).toList(),
+          ),
+              
+        ],
         
       ),
     );
   }
 }
+
+
 
 
